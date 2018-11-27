@@ -12,25 +12,46 @@ public class sharedBuffer {
 
         @Override
         public void run() {
-            cycBuf.addToCycbuf(x++);
+            try {
+                for (int i = 0; i < 10; i++) {
+                    cycBuf.addToCycbuf(x++);
+                    sleep(300);
+                    }
+                }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static class ConsumerThread extends Thread {
         CycBuf cycBuf;
-
+        int temp=0;
         public ConsumerThread(CycBuf c){
             cycBuf=c;
         }
 
         @Override
         public void run() {
-            System.out.println("consumer: "+ cycBuf.getCycTail() );
+            try {
+                for (int i = 0; i < 10; i++) {
+                    temp=cycBuf.getCycTail();
+                    if(temp== -1){
+                        return;
+                    }else {
+                        System.out.println("consumer: " +temp);
+                        sleep(500);
+                    }
+                }
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static void main(String[] args) {
-        CycBuf cycBuf=new CycBuf(10);
+    public static void main(String[] args) throws InterruptedException {
+        CycBuf cycBuf=new CycBuf();
 
         ProducerThread Producer=new ProducerThread(cycBuf);
         ConsumerThread consumer=new ConsumerThread(cycBuf);
