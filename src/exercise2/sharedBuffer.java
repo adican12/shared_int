@@ -15,7 +15,8 @@ public class sharedBuffer {
             try {
                 for (int i = 0; i < 10; i++) {
                     cycBuf.addToCycbuf(x++);
-                    sleep(300);
+                    System.out.println("producer: " +x);
+                    sleep(500);
                     }
                 }
             catch (InterruptedException e) {
@@ -37,7 +38,8 @@ public class sharedBuffer {
                 for (int i = 0; i < 10; i++) {
                     temp=cycBuf.getCycTail();
                     if(temp== -1){
-                        return;
+                        System.out.println("ERROR" );
+//                        return;
                     }else {
                         System.out.println("consumer: " +temp);
                         sleep(500);
