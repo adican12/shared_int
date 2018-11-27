@@ -54,13 +54,13 @@ public class sharedBuffer {
         CycBuf cycBuf=new CycBuf();
 
         ProducerThread Producer=new ProducerThread(cycBuf);
-        ConsumerThread consumer=new ConsumerThread(cycBuf);
+        ConsumerThread Consumer=new ConsumerThread(cycBuf);
 
         Producer.start();
-        consumer.start();
+        Consumer.start();
         try {
             Producer.join();
-            consumer.join();
+            Consumer.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
