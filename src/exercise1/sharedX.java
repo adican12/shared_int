@@ -1,3 +1,5 @@
+package exercise1;
+
 public class sharedX {
     public int x;
 
