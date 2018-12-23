@@ -5,9 +5,10 @@ public class lock_test {
     public static class incrementThread extends Thread{
         sharedX sharedX;
 //        Petersons_lock lock;
-        bakeryLock lock;
+//        bakeryLock lock;
+        filterLock lock;
         int threadID =1;
-        public incrementThread(sharedX x, bakeryLock lock) {this.sharedX = x;this.lock=lock;}
+        public incrementThread(sharedX x, filterLock lock) {this.sharedX = x;this.lock=lock;}
         @Override
         public void run() {
             try {
@@ -28,9 +29,10 @@ public class lock_test {
     public static class decramentThread extends Thread {
         sharedX sharedX;
 //        Petersons_lock lock;
-        bakeryLock lock;
+//        bakeryLock lock;
+        filterLock lock;
         int threadID=0;
-        public decramentThread(sharedX x, bakeryLock lock) { this.sharedX =x; this.lock=lock;}
+        public decramentThread(sharedX x, filterLock lock) { this.sharedX =x; this.lock=lock;}
 
         @Override
         public void run() {
@@ -52,7 +54,8 @@ public class lock_test {
     public static void main(String[] args) {
         sharedX s=new sharedX(3);
 //        Petersons_lock lock=new Petersons_lock();
-        bakeryLock lock=new bakeryLock(2);
+//        bakeryLock lock=new bakeryLock(2);
+        filterLock lock=new filterLock(2);
         decramentThread de = new decramentThread(s,lock);
         incrementThread in = new incrementThread(s,lock);
 
